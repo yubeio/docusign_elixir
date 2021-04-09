@@ -40,7 +40,7 @@ defmodule DocuSign.Connection do
           {Tesla.Middleware.Headers,
            [{"authorization", "#{token.token_type} #{token.access_token}"}]},
           Tesla.Middleware.EncodeJson,
-          {Tesla.Middleware.Timeout, timeout: 60_000}
+          {Tesla.Middleware.Retry, max_retries: 1}
         ],
         Tesla.Adapter.Mint
       )
